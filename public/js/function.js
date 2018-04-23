@@ -1,0 +1,1 @@
+function post(t,e,n){n="POST";var i=document.createElement("form");i.setAttribute("method",n),i.setAttribute("action",t);for(var r in e)if(e.hasOwnProperty(r)){var u=document.createElement("input");u.setAttribute("type","hidden"),u.setAttribute("name",r),u.setAttribute("value",e[r]),i.appendChild(u)}document.body.appendChild(i),i.submit()}

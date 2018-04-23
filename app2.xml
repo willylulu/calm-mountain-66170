@@ -1,0 +1,135 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<Module>
+<!-- Licensed under the Apache License, Version 2.0 (the "License"); you may not
+ * use this file except in compliance with the License. You may obtain a copy of
+ * the License at
+ *
+ * http://www.apache.org/licenses/LICENSE-2.0
+ *  
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS, WITHOUT
+ * WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the
+ * License for the specific language governing permissions and limitations under
+ * the License
+-->
+  <ModulePrefs title="Hangout Starter">
+    <Require feature="rpc" />
+    <Require feature="views" />
+    <Require feature="locked-domain" />
+  </ModulePrefs>
+  <Content type="html"><![CDATA[     
+<html>
+<head>
+	<link rel="stylesheet" href="https://calm-mountain-66170.herokuapp.com/css/bootstrap.min.css">
+	<script src="https://calm-mountain-66170.herokuapp.com/js/jquery.js"></script>
+	<script src="https://calm-mountain-66170.herokuapp.com/js/bootstrap.min.js"></script>
+	<script src="https://unpkg.com/react@15.3.1/dist/react.js"></script>
+    <script src="https://unpkg.com/react-dom@15.3.1/dist/react-dom.js"></script>
+    <script src="https://unpkg.com/babel-core@5.8.38/browser.min.js"></script>
+    <script src="https://unpkg.com/jquery@3.1.0/dist/jquery.min.js"></script>
+	<script src="https://calm-mountain-66170.herokuapp.com/js/md5.min.js"></script>
+	<script src="//hangoutsapi.talkgadget.google.com/talkgadget/apps/gadgets/js/rpc.js"></script>
+	<script src="//plus.google.com/hangouts/_/api/v1/hangout.js"></script>
+	<script src="https://cdn.socket.io/socket.io-1.4.5.js"></script>
+</head>
+<body>
+	<div ng-app="youhubStreamPanel" ng-controller="youhubCtrl" class="panel-group" id="accordion" style="margin:10px;">
+		<div class="container" style="width:100%;">
+			<div class="row">
+				<div class="col-sm-8" id="videoCanvasBody" style="height:100%;">
+				</div>
+				<div class="col-sm-4" id="videoControlPanel">
+					<div class="panel panel-default">
+						<div class="panel-heading" data-toggle="collapse" data-parent="#accordion" href="#collapse1">
+							<h4 class="panel-title">
+								Put Picture
+							</h4>
+						</div>
+						<div id="collapse1" class="panel-collapse collapse">
+							<div class="panel-body">
+								<span ng-repeat="x in images | filter : {'type' : '3'}">
+									<a href="#">
+										<img class="image img-rounded" src="{{ x.url }}" style="width:20%" ng-click="getPicture(x.url)">
+									</a>
+								</span><br/>
+								<canvas id="screenCanvas" ng-init="canvasInit()" ng-mouseup="upOnCanvas($event)" ng-mousedown="downOnCanvas($event)" ng-mousemove="moveOnCanvas($event)" style="border-style:solid;"></canvas><br/>
+								<input type="color" id="panColor"/>
+								<a href="#" ng-click="cleanPan()"><img src="https://m102.nthu.edu.tw/~s102062124/hw4/eraser.png" style="width:10%;"></a>
+							</div>
+						</div>
+					</div>
+					<div class="panel panel-default">
+						<div class="panel-heading" data-toggle="collapse" data-parent="#accordion" href="#collapse2">
+							<h4 class="panel-title">
+								Change Face
+							</h4>
+						</div>
+						<div id="collapse2" class="panel-collapse collapse">
+							<div class="panel-body">
+								<span ng-repeat="x in images | filter : {'type' : '1'}">
+									<a href="#">
+										<img class="img-rounded" src="{{ x.url }}" style="width:40%" ng-click="face(x.url)">
+									</a>
+								</span>
+							</div>
+						</div>
+					</div>
+					<div class="panel panel-default">
+						<div class="panel-heading" data-toggle="collapse" data-parent="#accordion" href="#collapse3">
+							<h4 class="panel-title">
+								Change Background
+							</h4>
+						</div>
+						<div id="collapse3" class="panel-collapse collapse">
+							<div class="panel-body">
+								<span ng-repeat="x in images | filter : {'type' : '2'}">
+									<a href="#">
+										<img class="img-rounded" src="{{ x.url }}" style="width:40%" ng-click="background(x.url)">
+									</a>
+								</span>
+							</div>
+						</div>
+					</div>
+					<div class="panel panel-default">
+						<div class="panel-heading" data-toggle="collapse" data-parent="#accordion" href="#collapse4">
+							<h4 class="panel-title">
+								Messenger
+							</h4>
+						</div>
+						<div id="collapse4" class="panel-collapse collapse">
+							<div class="container" id="commit"><br/></div>
+						</div>
+					</div>
+					<div class="panel panel-default">
+						<div class="panel-heading" data-toggle="collapse" data-parent="#accordion" href="#collapse5">
+							<h4 class="panel-title">
+								Subtitle
+							</h4>
+						</div>
+						<div id="collapse5" class="panel-collapse collapse">
+							<div class="container" id="speechPanel"><br/>
+								<div class="form-inline">
+									<div class="form-group">
+										<input type="text" class="form-control" id="catchVoice">
+									</div>
+									<div class="form-group">
+										<button type="button" class="btn btn-default" ng-click="startSpeech()" id="speechToggle">Start</button>
+									</div>
+									<div class="form-group">
+										<button type="button" class="btn btn-default" ng-click="sendSpeech()">Send</button>
+									</div>
+								</div><br/>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</body>
+<script src="https://calm-mountain-66170.herokuapp.com/js/hangoutMain.js"></script>
+<script src="https://calm-mountain-66170.herokuapp.com/js/hangoutAngular.js"></script>
+</html>
+]]>
+</Content>
+</Module>

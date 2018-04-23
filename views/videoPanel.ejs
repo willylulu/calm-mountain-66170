@@ -1,0 +1,71 @@
+<span class="videoPanel">
+	<a href="#" onclick="showMessage('<%= id%>')"><img class="img-rounded" src="https://img.youtube.com/vi/<%= id%>/0.jpg" style="width: 20%;" data-toggle="modal" data-target="#myVideo_<%= id%>"></a>
+</span>
+<div class="modal fade streamModalVideo" client-id="<%= id%>" id="myVideo_<%= id%>" role="dialog">
+	<div class="modal-dialog" style="width:60%">
+	    <!-- Modal content-->
+	    <div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal">&times;</button>
+				<h4 class="modal-title" id="myVideoName_<%= id%>"><%= hostName%>'s Video</h4>
+			</div>
+			<div class="modal-body">
+				<ul class="nav nav-tabs">
+					<li class="active"><a data-toggle="tab" href="#youtubeCue_<%= id%>">Video</a></li>
+					<li><a data-toggle="tab" href="#youtubeInfo_<%= id%>">Info</a></li>
+				</ul>
+				<div class="tab-content">
+					<div id="youtubeCue_<%= id%>" class="tab-pane fade in active">
+						<div class="col-sm-8" style="height: 35vh;"><br/>
+							<iframe style="position: absolute;width: 95%;height: 95%;" src="https://www.youtube.com/embed/<%= id%>" frameborder="0" allowfullscreen></iframe>
+						</div>
+						<div class="col-sm-4">
+							<br/>
+							<div id="messageVideo_<%= id%>_wraper"><div class="message container" id="message_Video<%= id%>"></div>
+							</div>
+						</div>
+						<div>
+							<input style="width:20%;display:inline-block;" id="textVideo_<%= id%>"  type="text" class="form-control">
+							<button type="button" class="btn btn-danger" onclick="sendMessageBodyVideo('<%= id%>')">Send</button>
+						</div>
+					</div>
+					<div id="youtubeInfo_<%= id%>" class="tab-pane fade">
+						<div class="row">
+							<div class="col-sm-6">
+								<h3>Author</h3>
+								<div class="well well-sm" id="youtubeInfoAuthor0_<%= id%>"></div>
+							</div>
+							<div class="col-sm-6">
+								<h3>View</h3>
+								<div class="well well-sm" id="youtubeInfoView0_<%= id%>"></div>
+							</div>
+						</div>
+						<div class="row">
+							<div class="col-sm-6">
+								<h3>Discription</h3>
+								<div class="well well-sm" id="youtubeInfoTags0_<%= id%>"></div>
+							</div>
+							<div class="col-sm-6">
+								<h3>Like</h3>
+								<div class="well well-sm" id="youtubeInfoLike0_<%= id%>"></div>
+							</div>
+						</div>
+						<div class="row">
+							<div class="col-sm-6">
+								<h3>Publish time</h3>
+								<div class="well well-sm" id="youtubeInfoPublish0_<%= id%>"></div>
+							</div>
+							<div class="col-sm-6">
+								<h3>Dislike</h3>
+								<div class="well well-sm" id="youtubeInfoDislike0_<%= id%>"></div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="modal-footer">
+				<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+			</div>
+		</div>
+	</div>
+</div>

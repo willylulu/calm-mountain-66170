@@ -1,0 +1,19 @@
+<div class="panel panel-default discussion" id="discussion_<%= cid%>">
+  <div class="panel-heading">
+    <a data-toggle="collapse" data-parent="#discussAccordion" href="#collapse_<%= cid%>">
+      <h4 class="panel-title">
+          <span><%= title%></span>
+          <span style="float: right;"><%= time%></span>
+          <span style="float: right;"><%= name%>&nbsp&nbsp/&nbsp&nbsp</span>
+      </h4>
+    </a>
+  </div>
+  <div id="collapse_<%= cid%>" class="panel-collapse collapse">
+    <div class="well well-sm" style="margin: 5px;"><%= content%></div>
+    <div class="well well-sm" style="margin: 5px;" id="discussMessage_<%= cid%>">
+      <div contenteditable="true" id="discussMessageContent_<%= cid%>" class="well well-sm" placeholder="Say something." style="display: inline-block; width: 50%; margin: 0px;"></div>
+      <button class="btn btn-warning discussSubmitMessageButton" target='<%= cid%>'>Submit</button>
+      <button class="btn btn-info discussShowMessageButton" target='<%= cid%>'>Show Messages</button><br/><br/>
+    </div>
+  </div>
+</div>

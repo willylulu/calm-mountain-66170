@@ -1,0 +1,1 @@
+function accountMain(c){htmlActionSingle($("#myPictures"),"post","getAccountImage","accountImage",{userID:c}),htmlActionSingle($("#myVideos"),"post","getAccountVideo","accountVideo",{userID:c}),htmlAction($("#myDiscussions"),"post","getAccountDiscuss","accountDiscuss",{userID:c,page:0},function(){htmlPartial($("#myDiscussions"),"accountDiscussJs")})}

@@ -1,0 +1,62 @@
+<span class="ownDiscussion">
+  <script type="text/javascript">
+    var tempContent;
+    function ownDiscussEditHendler() {
+      // body...
+      switch($(this).text()){
+        case 'Edit':
+          var id = $(this).attr('target');
+          $('#ownDiscussContent_'+id).attr('contenteditable','true');
+        break;
+        case 'Save':
+          var id = $(this).attr('target');
+          $(this).html('Edit');
+          var content = $('#ownDiscussContent_'+id).html();
+          console.log(userID);
+          console.log(id);
+          $.post('/discussUpdate',{cid:id,userID:userID,content:content},function(res) {
+            console.log(res);
+          });
+        break;
+      }
+    }
+    function ownDiscussDeleteHendler() {
+      // body...
+      var id = $(this).attr('target');
+      $.post('/discussDelete',{cid:id,userID:userID},function(res) {
+        window.location.reload();
+      });
+    }
+    function ownDiscussMessageHendler() {
+      // body...
+
+      var cid = $(this).attr('target');
+      if($(this).text()=='Show Messages'){
+        $(this).text('Hide Messages');
+        htmlAction($('#ownDiscussMessagePanel_'+cid),'post','getDiscussionMessages','discussMessagePanel',{cid:cid});
+      }
+      else{
+        $(this).text('Show Messages');
+        $('.discussMessageElement_'+cid).remove();
+      }
+    }
+    function ownDiscussSubmitMessageButtonHendler() {
+      // body...
+      var cid = $(this).attr('target');
+      var content = $('#ownDiscussMessageContent_'+cid).html();
+      $.post('/discussMessageInsert',{cid:cid,content:content,userName:userName,userID:userID},function(res){
+        alert(res);
+        window.location.reload();
+      });
+    }
+    $('.ownDiscussEdit').click(ownDiscussEditHendler);
+    $('.ownDiscussDelete').click(ownDiscussDeleteHendler);
+    $('.ownDiscussMessage').click(ownDiscussMessageHendler);
+    $('.ownDiscussSubmitMessageButton').click(ownDiscussSubmitMessageButtonHendler);
+    $('.ownDiscussContent').focusin(function(){
+      var id = $(this).attr('target');
+      tempContent = $(this).html();
+      $("#ownDiscussEdit_"+id).html('Save');
+    });
+  </script>
+</span>

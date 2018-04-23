@@ -1,0 +1,55 @@
+<li><a target="_blank" href="https://talkgadget.google.com/hangouts/_?hso=0&gid=234883855657&gd=<%= user['id']%>"><span class="glyphicon glyphicon-plus"></span> Start Hangout Now!</a></li>
+<li><a href="#" data-toggle="modal" data-target="#myAccountPanel" id="accountButton"><span class="glyphicon glyphicon-user"></span> <%= user['name']%></a></li>
+<div class="modal fade" id="myAccountPanel" role="dialog">
+	<div class="modal-dialog" style="width:60%">
+	    <!-- Modal content-->
+	    <div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal">&times;</button>
+				<h4 class="modal-title"><%= user['name']%></h4>
+			</div>
+			<div class="modal-body">
+				<ul class="nav nav-tabs">
+					<li class="active"><a data-toggle="tab" href="#home">Home</a></li>
+					<li><a data-toggle="tab" href="#myDiscussions">My Discussions</a></li>
+					<li><a data-toggle="tab" href="#myVideos">My Videos</a></li>
+					<li><a data-toggle="tab" href="#myPictures">My Collections</a></li>
+					<li><a data-toggle="tab" href="#uploadImage">Upload</a></li>
+				</ul><br/>
+				<div class="tab-content">
+					<div id="home" class="tab-pane fade in active">
+						<h3>HOME</h3>
+						<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+					</div>
+					<div id="myDiscussions" class="tab-pane fade"></div>
+					<div id="myVideos" class="tab-pane fade"></div>
+					<div id="myPictures" class="tab-pane fade"></div>
+					<div id="uploadImage" class="tab-pane fade">
+						<div class="well" style="text-align: center;"><h4>Drag to the square!</h4></div>
+						<div id="dropDIV" ondragover="dragoverHandler(event)" ondrop="dropHandler(event)">
+					    </div>
+					    <div style="text-align: right;">
+						    <div class="dropdown">
+								<button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown">Choose Type
+								<span class="caret"></span></button>
+								<ul class="dropdown-menu">
+									<li><a href="#" value="1" class="uploadImageType">Face</a></li>
+									<li><a href="#" value="2" class="uploadImageType">Background</a></li>
+									<li><a href="#" value="3" class="uploadImageType">Picture</a></li>
+									<li class="divider"></li>
+									<li><a href="#">Tutorial</a></li>
+								</ul>
+							</div><br/>
+					    	<button type="button" class="btn btn-warning" id="uploadImageSubmitButton" value="0" style="display: none;">Upload</button>
+					    </div>
+					</div>
+				</div>
+			</div>
+			<div class="modal-footer">
+				<%- include('login',{name:'anotherAccount',title:'Use Other Account'}); %>
+				<button type="button" class="btn btn-default" id="logout" style="display:none;">Logout</button>
+				<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+			</div>
+		</div>
+	</div>
+</div>

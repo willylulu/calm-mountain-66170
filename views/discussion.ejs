@@ -1,0 +1,49 @@
+<!-- Modal -->
+<div id="discussionModal" class="modal fade" role="dialog">
+  <div class="modal-dialog" style="width:60%">
+
+    <!-- Modal content-->
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <h4 class="modal-title">Discussion</h4>
+      </div>
+      <div class="modal-body">
+        <ul class="nav nav-tabs">
+          <li class="active"><a data-toggle="tab" href="#discussHome">Home</a></li>
+          <li><a data-toggle="tab" href="#discussPost">Post</a></li>
+        </ul><br/>
+        <div class="tab-content">
+          <div id="discussHome" class="tab-pane fade in active">
+            <div class="panel-group" id="discussAccordion">
+
+            </div>
+            <ul class="pager">
+              <li class="previous"><a href="#" onclick="changeDiscussPage('down')">Previous</a></li>
+              <li class="next"><a href="#" onclick="changeDiscussPage('up')">Next</a></li>
+            </ul>
+          </div>
+          <div id="discussPost" class="tab-pane fade">
+            <div class="form-group">
+              <input type="text" class="form-control" id="discussTitle" placeholder="Title">
+            </div>
+            <div class="checkbox">
+              <label><input type="checkbox" id="discussAnony">Anonymous</label>
+            </div>
+            <span id="discussContentBody">
+              <div  contentEditable="true" class="well well-sm" id="discussContent"></div>
+              <input type="text" class="form-control" id="discussInput" style="display: none;" tagType='0' placeholder="http://">
+            </span>
+            <button type="button" class="btn btn-default" id="discussLink">Link</button>
+            <button type="button" class="btn btn-default" id="discussImage">Image</button>
+            <button type="button" class="btn btn-default" id="discussYoutube">Youtube</button>
+            <button type="button" class="btn btn-default" id="discussSubmit">Submit</button>
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,208 @@
+<ul class="nav nav-tabs">
+	<li class="active"><a data-toggle="tab" href="#pictures">Collections</a></li>
+	<li><a data-toggle="tab" href="#faces">Faces</a></li>
+	<li><a data-toggle="tab" href="#backgrounds">Backgrounds</a></li>
+	<li><a data-toggle="tab" href="#uploadImageByUrl">Find Picture</a></li>
+</ul><br/>
+<div class="tab-content">
+	<div id="pictures" class="tab-pane fade in active">
+		<% for(var key in images){ %>
+			<span class="dropdown image_dropdown" target="0<%= key%>">
+				<img src="<%= images[key]['url']%>" class="img-rounded uploadPicture  dropdown-toggle" draggable="true" ondragstart="deleteDrag(event)" alt="Cinque Terre" style="width:10%;" data-toggle="dropdown">
+				<div class="dropdown-menu">
+					<div class="form-inline" style="margin:5px;">
+						<div class="form-group">
+							<input type="text" class="form-control nickNameInput" target="<%= images[key]['url']%>" id="nickname_0<%= key%>" placeholder="nickname?">
+						</div>
+					</div>
+				</div>
+			</span>
+		<% } %>
+		<div style="text-align: right;">
+			<img src="http://core0.staticworld.net/images/article/2013/01/trash_big-100021876-large.jpg" class="img-rounded" alt="Cinque Terre" style="width:10%;" ondrop="deleteDrop(event)" ondragover="allowDeleteDrop(event)">
+		</div>
+	</div>
+	<div id="faces" class="tab-pane fade">
+		<% for(var key in images){ %>
+			<% if(images[key]['type']=="1"){ %>
+				<span class="dropdown image_dropdown" target="1<%= key%>">
+					<img src="<%= images[key]['url']%>" class="img-rounded uploadPicture  dropdown-toggle" draggable="true" ondragstart="deleteDrag(event)" alt="Cinque Terre" style="width:10%;" data-toggle="dropdown">
+					<div class="dropdown-menu">
+						<div class="form-inline" style="margin:5px;">
+							<div class="form-group">
+								<input type="text" class="form-control nickNameInput" target="<%= images[key]['url']%>" id="nickname_1<%= key%>" placeholder="nickname?">
+							</div>
+						</div>
+					</div>
+				</span>
+			<% } %>
+		<% } %>
+		<div style="text-align: right;">
+			<img src="http://core0.staticworld.net/images/article/2013/01/trash_big-100021876-large.jpg" class="img-rounded" alt="Cinque Terre" style="width:10%;" ondrop="deleteDrop(event)" ondragover="allowDeleteDrop(event)">
+		</div>
+	</div>
+	<div id="backgrounds" class="tab-pane fade">
+		<% for(var key in images){ %>
+			<% if(images[key]['type']=="2"){ %>
+				<span class="dropdown image_dropdown" target="2<%= key%>">
+					<img src="<%= images[key]['url']%>" class="img-rounded uploadPicture  dropdown-toggle" draggable="true" ondragstart="deleteDrag(event)" alt="Cinque Terre" style="width:10%;" data-toggle="dropdown">
+					<div class="dropdown-menu">
+						<div class="form-inline" style="margin:5px;">
+							<div class="form-group">
+								<input type="text" class="form-control nickNameInput" id="nickname_2<%= key%>" target="<%= images[key]['url']%>" placeholder="nickname?">
+							</div>
+						</div>
+					</div>
+				</span>
+			<% } %>
+		<% } %>
+		<div style="text-align: right;">
+			<img src="http://core0.staticworld.net/images/article/2013/01/trash_big-100021876-large.jpg" class="img-rounded" alt="Cinque Terre" style="width:10%;" ondrop="deleteDrop(event)" ondragover="allowDeleteDrop(event)">
+		</div>
+	</div>
+	<div id="uploadImageByUrl" class="tab-pane fade">
+		<div style="text-align: center;">
+			<div>
+				<img id="imageDisplayByUrl" src="">
+			</div><br/>
+			<div>
+				<input type="text" class="form-control" id="urlInput" placeholder="Input Url at here." onchange="imageUrlOnchange()"><br/>
+			</div>
+		</div>
+		<div style="text-align: right;">
+			<div class="dropdown">
+				<button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown">Choose Type
+				<span class="caret"></span></button>
+				<ul class="dropdown-menu">
+					<li><a href="#" value="4" class="uploadImageType">Face</a></li>
+					<li><a href="#" value="5" class="uploadImageType">Background</a></li>
+					<li><a href="#" value="6" class="uploadImageType">Picture</a></li>
+					<li class="divider"></li>
+					<li><a href="#">Tutorial</a></li>
+				</ul>
+			</div><br/>
+			<button type="button" class="btn btn-success" id="saveImageByUrlButton" value="0" style="display: none;">Save it!</button>
+		</div>
+	</div>
+</div>
+<script type="text/javascript">
+
+	function uploadImageTypeHendler(){
+		switch($(this).attr('value'))
+		{
+			case "1":
+				$('#uploadImageSubmitButton').attr('value','1');
+				$('#uploadImageSubmitButton').html('Upload Face');
+				$('#uploadImageSubmitButton').show();
+			break;
+			case "2":
+				$('#uploadImageSubmitButton').attr('value','2');
+				$('#uploadImageSubmitButton').html('Upload Background');
+				$('#uploadImageSubmitButton').show();
+			break;
+			case "3":
+				$('#uploadImageSubmitButton').attr('value','3');
+				$('#uploadImageSubmitButton').html('Upload Picture');
+				$('#uploadImageSubmitButton').show();
+			break;
+			case "4":
+				$('#saveImageByUrlButton').attr('value','1');
+				$('#saveImageByUrlButton').html('Save Face');
+				$('#saveImageByUrlButton').show();
+			break;
+			case "5":
+				$('#saveImageByUrlButton').attr('value','2');
+				$('#saveImageByUrlButton').html('Save Background');
+				$('#saveImageByUrlButton').show();
+			break;
+			case "6":
+				$('#saveImageByUrlButton').attr('value','3');
+				$('#saveImageByUrlButton').html('Save Picture');
+				$('#saveImageByUrlButton').show();
+			break;
+		}
+	}
+
+	function saveImageByUrlButtonHendler() {
+	// body...
+		if($('#urlInput').val()!="")
+		{
+			$.post(
+				'saveImage',
+				{url:$('#urlInput').val(),type:$('#saveImageByUrlButton').attr('value'),userID:userID},
+				function(res){
+					alert(res);
+					switch($('#saveImageByUrlButton').attr('value'))
+					{
+						case "1":
+							$('#saveImageByUrlButton').html('Upload Face');
+						break;
+						case "2":
+							$('#saveImageByUrlButton').html('Upload Background');
+						break;
+						case "3":
+							$('#saveImageByUrlButton').html('Upload Picture');
+						break;
+					}
+					window.location.reload();
+				}
+			);
+		}
+	}
+
+	function uploadPictureHendler() {
+	// body...
+		var img = $(this)[0];
+		$('.deleteImageByUrlButton').show();
+		$('.deleteImageByUrlButton').attr('value',img.src);
+	}
+
+	function uploadPictureHoverHendler() {
+		// body...
+		$(this).animate({width: '15%'},200);
+			
+	}
+
+	function uploadPictureUnHoverHendler() {
+		// body...
+		$(this).animate({width: '10%'},200);
+	}
+
+	function uploadVideoHendler() {
+	// body...
+		$('.deleteVideo').show();
+		$('.deleteVideo').attr('value',$(this).attr('youtubeID'));
+	}
+
+	function deleteVideoHendler() {
+		// body...
+		if(confirm("Sure to delete?")){
+			var url = $(this).attr('value');
+			$.post('/deleteVideo',{id:url},function(response) {
+				// body...
+				window.location.reload();
+			});
+		}
+	}
+
+	$(".uploadImageType").click(uploadImageTypeHendler);
+	$("#saveImageByUrlButton").click(saveImageByUrlButtonHendler);
+	$('.uploadPicture').click(uploadPictureHendler);
+	$('.uploadPicture').hover(uploadPictureHoverHendler,uploadPictureUnHoverHendler);
+	$(".image_dropdown").on("show.bs.dropdown", function(){
+		var key = $(this).attr('target');
+		var url = $("#nickname_"+key).attr('target');
+		$.post('/getNickname',{userID:userID,url:url},function(response) {
+			$("#nickname_"+key).val(response[0].nickname);
+		});
+	});
+	$(".image_dropdown").on("hide.bs.dropdown", function(){
+		var key = $(this).attr('target');
+		var nickname = $("#nickname_"+key).val();
+		var url = $("#nickname_"+key).attr('target');
+		$.post('/setNickname',{userID:userID,url:url,nickname:nickname},function(response) {
+			// body...
+			console.log(response);
+		});
+	});
+</script>

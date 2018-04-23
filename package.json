@@ -1,0 +1,45 @@
+{
+  "name": "hangoutTest",
+  "version": "0.2.5",
+  "description": "A sample Node.js app using Express 4",
+  "engines": {
+    "node": "6.2.0"
+  },
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js"
+  },
+  "dependencies": {
+    "express": "4.13.3",
+    "http": "latest",
+    "socket.io": "1.4.5",
+    "path": "latest",
+    "ejs": "latest",
+    "mongodb": "latest",
+    "js-md5": "latest",
+    "fb": "latest",
+    "body-parser": "latest",
+    "imgur": "latest",
+    "cors": "latest",
+    "htmlspecialchars": "latest",
+    "youtube-node": "latest",
+    "compression": "latest",
+    "express-session": "latest",
+    "fs":"latest"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/heroku/hangoutTest"
+  },
+  "keywords": [
+    "node",
+    "heroku",
+    "express"
+  ],
+  "license": "MIT",
+  "devDependencies": {
+    "gulp-imagemin": "^3.0.3",
+    "gulp-uglify": "^2.0.0",
+    "gulp-uglifycss": "^1.0.6"
+  }
+}

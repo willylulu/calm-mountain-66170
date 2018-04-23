@@ -1,0 +1,7 @@
+<% for(var key in items){ %>
+<span>
+	<a href="#">
+		<img class="image img-rounded" src="<%= items[key].url%>" style="width:20%" onclick="getPicture('<%= items[key].url%>')">
+	</a>
+</span>
+<% } %>

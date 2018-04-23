@@ -1,0 +1,76 @@
+<div ng-app="youhubApp" ng-controller="youhubCtrl">
+	<h2>Wonderful review!</h2>
+	<div class="well">
+		<span ng-repeat="x in videos">
+			<a href="#" ng-click="showMessage(x.id)"><img class="img-rounded" ng-src="https://img.youtube.com/vi/{{x.id}}/0.jpg" style="width: 20%;" data-toggle="modal" data-target="#myVideo_{{ x.id }}"></a>
+			<div class="modal fade streamModalVideo" client-id="{{ x.id }}" id="myVideo_{{ x.id }}" role="dialog">
+				<div class="modal-dialog" style="width:60%">
+				    <!-- Modal content-->
+				    <div class="modal-content">
+						<div class="modal-header">
+							<button type="button" class="close" data-dismiss="modal">&times;</button>
+							<h4 class="modal-title" id="myVideoName_{{ x.id }}">{{x.hostName}}'s Video</h4>
+						</div>
+						<div class="modal-body">
+							<ul class="nav nav-tabs">
+								<li class="active"><a data-toggle="tab" href="#youtubeCue_{{ x.id }}">Video</a></li>
+								<li><a data-toggle="tab" href="#youtubeInfo_{{ x.id }}">Info</a></li>
+							</ul>
+							<div class="tab-content">
+								<div id="youtubeCue_{{ x.id }}" class="tab-pane fade in active">
+									<div class="col-sm-8" style="height: 35vh;"><br/>
+										<iframe style="position: absolute;width: 95%;height: 95%;" ng-src="{{x.id | trusted}}" frameborder="0" allowfullscreen></iframe>
+									</div>
+									<div class="col-sm-4">
+										<br/>
+										<div id="messageVideo_{{ x.id }}_wraper"><div class="message container" id="message_Video{{ x.id }}"></div>
+										</div>
+									</div>
+									<div>
+										<input style="width:20%;display:inline-block;" id="textVideo_{{x.id}}" ng-keydown="keypressVideo($event,x.id)" type="text" class="form-control">
+										<button type="button" class="btn btn-danger" ng-click="sendMessageVideo(x.id)">Send</button>
+									</div>
+								</div>
+								<div id="youtubeInfo_{{ x.id }}" class="tab-pane fade">
+									<div class="row">
+										<div class="col-sm-6">
+											<h3>Author</h3>
+											<div class="well well-sm" id="youtubeInfoAuthor0_{{ x.id }}"></div>
+										</div>
+										<div class="col-sm-6">
+											<h3>View</h3>
+											<div class="well well-sm" id="youtubeInfoView0_{{ x.id }}"></div>
+										</div>
+									</div>
+									<div class="row">
+										<div class="col-sm-6">
+											<h3>Discription</h3>
+											<div class="well well-sm" id="youtubeInfoTags0_{{ x.id }}"></div>
+										</div>
+										<div class="col-sm-6">
+											<h3>Like</h3>
+											<div class="well well-sm" id="youtubeInfoLike0_{{ x.id }}"></div>
+										</div>
+									</div>
+									<div class="row">
+										<div class="col-sm-6">
+											<h3>Publish time</h3>
+											<div class="well well-sm" id="youtubeInfoPublish0_{{ x.id }}"></div>
+										</div>
+										<div class="col-sm-6">
+											<h3>Dislike</h3>
+											<div class="well well-sm" id="youtubeInfoDislike0_{{ x.id }}"></div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="modal-footer">
+							<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+						</div>
+					</div>
+				</div>
+			</div>
+		</span>
+	</div>
+</div>

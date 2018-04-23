@@ -1,0 +1,56 @@
+<button type="button" class="btn btn-default" data-target="#<%= name%>" data-toggle="collapse"><%= title%></button>
+<div id="<%= name%>" class="panel-collapse collapse">
+	<div class="panel-body">
+		<div class="form-inline">
+			<div class="form-group">
+				<label for="loginInputAccount">Account:</label>
+				<input type="text" class="form-control" id="<%= name%>_Account" placeholder="Enter Account">
+			</div><br/><br/>
+			<div class="form-group">
+				<label for="loginInputPwd">Password:</label>
+				<input type="password" class="form-control" id="<%= name%>_Pwd" placeholder="Enter password">
+			</div><br/><br/>
+			<div id="<%= name%>_InputName" style="display:none;" class="form-group">
+				<label for="loginInputName">NickName:</label>
+				<input type="text" class="form-control" id="<%= name%>_Name" placeholder="Enter NickName">
+			</div><br/><br/>
+			<div class="checkbox">
+				<label><input id="<%= name%>_Register" type="checkbox"> Register</label>
+		    </div><br/>
+		    <button type="button" id="<%= name%>_Submit" class="btn btn-default">Submit</button>
+		</div>
+	</div>
+</div>
+<script>
+	function loginSubmitHendler() {
+		// body...
+		if($(this).text()=='Submit'){
+			var account = $('#<%= name%>_Account').val();
+			var password = $('#<%= name%>_Pwd').val();
+			post('/loginByDefault',{account:account,password:password});
+		}
+		else if($(this).text()=='Register'){
+			var account = $('#<%= name%>_Account').val();
+			var password = $('#<%= name%>_Pwd').val();
+			var userName = $('#<%= name%>_Name').val();
+			$.post('/register',{account:account,password:password,userName:userName},function(response) {
+				// body...
+				alert(response);
+			});
+		}
+	}
+
+	function loginCheckRegisterHendler() {
+		// body...
+		if($(this)[0].checked){
+			$('#<%= name%>_Submit').text('Register');
+			$('#<%= name%>_InputName').show();
+		}
+		else{
+			$('#<%= name%>_Submit').text('Submit');
+			$('#<%= name%>_InputName').hide();
+		}
+	}
+	$('#<%= name%>_Register').click(loginCheckRegisterHendler);
+	$('#<%= name%>_Submit').click(loginSubmitHendler);
+</script>

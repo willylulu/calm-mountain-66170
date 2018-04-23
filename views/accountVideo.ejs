@@ -1,0 +1,100 @@
+<ul class="nav nav-tabs">
+<% var k=0; %>
+<% for(var key in videos){ %>
+	<a href="#" id="ownVideoLink_<%= k%>" style="display: none;" onclick="getOwnVideoMessage('<%= videos[key]['id']%>')"><img class="img-rounded uploadVideo" youtubeID="<%= videos[key]['id']%>" src="https://img.youtube.com/vi/<%= videos[key]['id']%>/0.jpg" style="width: 10%;min-width: 80px;" data-toggle="tab" href="#myOwnVideo_<%= videos[key]['id']%>"></a>
+<% k=k+1; %>
+<% } %>
+</ul>
+<script type="text/javascript">var ownVideoNum=<%= k %>;</script>
+<ul class="pager">
+  <li class="previous"><a href="#" onclick="changeOwnVideoPage(0)">Previous</a></li>
+  <li class="next"><a href="#" onclick="changeOwnVideoPage(1)">Next</a></li>
+</ul>
+<div class="tab-content">
+	<% videos.forEach(function(video){ %>
+		<div id="myOwnVideo_<%= video.id%>" class="tab-pane fade">
+			<ul class="nav nav-tabs">
+				<li class="active"><a data-toggle="tab" href="#youtubeOwnCue_<%= video.id%>">Video</a></li>
+				<li><a data-toggle="tab" onclick="getYoutubeData(1,'<%= video.id%>');" href="#youtubeOwnInfo_<%= video.id%>">Info</a></li>
+			</ul>
+			<div class="tab-content">
+				<div id="youtubeOwnCue_<%= video.id%>" class="tab-pane fade in active">
+					<div class="col-sm-8" style="height: 35vh;"><br/>
+						<iframe style="position: absolute;width: 95%;height: 95%;"src="https://www.youtube.com/embed/<%= video.id%>" frameborder="0" allowfullscreen></iframe>
+					</div>
+					<div class="col-sm-4">
+						<div id="messageOwn_<%= video.id%>_wraper">
+							<br/>
+							<div class="message container" id="messageOwn_<%= video.id%>">
+							</div>
+						</div>
+					</div>
+					<div>
+						<input style="width:20%;display:inline-block;" id="textOwn_<%= video.id%>" onkeydown="t_keypress(event,'<%= video.id%>')" type="text" class="form-control">
+						<button type="button" class="btn btn-danger" onclick="t_sendMessage('<%= video.id%>')">Send</button>
+					</div>
+				</div>
+				<div id="youtubeOwnInfo_<%= video.id%>" class="tab-pane fade">
+					<div class="row">
+						<div class="col-sm-6">
+							<h3>Author</h3>
+							<div class="well well-sm" id="youtubeInfoAuthor1_<%= video.id%>"></div>
+						</div>
+						<div class="col-sm-6">
+							<h3>View</h3>
+							<div class="well well-sm" id="youtubeInfoView1_<%= video.id%>"></div>
+						</div>
+					</div>
+					<div class="row">
+						<div class="col-sm-6">
+							<h3>Discription</h3>
+							<div class="well well-sm" id="youtubeInfoTags1_<%= video.id%>"></div>
+						</div>
+						<div class="col-sm-6">
+							<h3>Like</h3>
+							<div class="well well-sm" id="youtubeInfoLike1_<%= video.id%>"></div>
+						</div>
+					</div>
+					<div class="row">
+						<div class="col-sm-6">
+							<h3>Publish time</h3>
+							<div class="well well-sm" id="youtubeInfoPublish1_<%= video.id%>"></div>
+						</div>
+						<div class="col-sm-6">
+							<h3>Dislike</h3>
+							<div class="well well-sm" id="youtubeInfoDislike1_<%= video.id%>"></div>
+						</div>
+					</div>
+				</div>
+			</div>
+			
+		</div>
+	<% }); %>
+</div>
+<div style="text-align: right;">
+	<button type="button" class="btn btn-danger deleteVideo" value="0" style="display: none;">Delete</button>
+	<a target="_blank" href="https://www.youtube.com/my_videos?o=U">
+		<button type="button" class="btn btn-success">Youtube Video Manager</button>
+	</a>
+</div>
+<script type="text/javascript">
+	function uploadVideoHendler() {
+		// body...
+		$('.deleteVideo').show();
+		$('.deleteVideo').attr('value',$(this).attr('youtubeID'));
+	}
+
+	function deleteVideoHendler() {
+		// body...
+		if(confirm("Sure to delete?")){
+			var url = $(this).attr('value');
+			$.post('/deleteVideo',{id:url},function(response) {
+				// body...
+				window.location.reload();
+			});
+		}
+	}
+	$('.uploadVideo').click(uploadVideoHendler);
+	$('.deleteVideo').click(deleteVideoHendler);
+	showVideoToken(OwnVideoShowNum);
+</script>

@@ -1,0 +1,29 @@
+<span class="discussion">
+	<script type="text/javascript">
+		function discussSubmitMessageButtonHendler() {
+			// body...
+			var cid = $(this).attr('target');
+			var content = $('#discussMessageContent_'+cid).html();
+			$.post('/discussMessageInsert',{cid:cid,content:content,userName:userName,userID:userID},function(res){
+				alert(res);
+				window.location.reload();
+			});
+		}
+
+		function discussShowMessageButtonHendler() {
+			// body...
+			var cid = $(this).attr('target');
+			if($(this).text()=='Show Messages'){
+				$(this).text('Hide Messages');
+				htmlAction($('#discussMessage_'+cid),'post','getDiscussionMessages','discussMessagePanel',{cid:cid});
+			}
+			else{
+				$(this).text('Show Messages');
+				$('.discussMessageElement_'+cid).remove();
+			}
+		}
+
+		$('.discussSubmitMessageButton').click(discussSubmitMessageButtonHendler);
+		$('.discussShowMessageButton').click(discussShowMessageButtonHendler);
+	</script>
+</span>

@@ -1,0 +1,22 @@
+<div class="panel panel-default ownDiscussion" id="ownDiscussion_<%= cid%>">
+  <div class="panel-heading">
+    <a data-toggle="collapse" data-parent="#discussAccordion" href="#ownCollapse_<%= cid%>">
+      <h4 class="panel-title">
+          <span><%= title%></span>
+          <span style="float: right;"><%= time%></span>
+          <span style="float: right;"><%= name%>&nbsp&nbsp/&nbsp&nbsp</span>
+      </h4>
+    </a>
+  </div>
+  <div id="ownCollapse_<%= cid%>" class="panel-collapse collapse">
+    <div class="ownDiscussContent well well-sm" target="<%= cid%>" title="<%= title%>" id="ownDiscussContent_<%= cid%>" style="margin:5px;"><%= content%></div>
+    <div class="well well-sm" style="margin:5px;">
+      <button type="button" state='edit' id="ownDiscussEdit_<%= cid%>" target="<%= cid%>" class="ownDiscussEdit btn btn-info">Edit</button>
+      <button type="button" id="ownDiscussDelete_<%= cid%>" target="<%= cid%>" class="ownDiscussDelete btn btn-danger">Delete</button>
+      <button type="button" id="ownDiscussMessage_<%= cid%>" target="<%= cid%>" class="ownDiscussMessage btn btn-warning">Show Messages</button>
+      <div id="ownDiscussMessagePanel_<%= cid%>" style="margin-top: 10px;margin-bottom: 10px;"></div>
+      <div contenteditable="true" id="ownDiscussMessageContent_<%= cid%>" class="well well-sm" placeholder="Say something." style="display: inline-block; width: 50%; margin: 0px;"></div>
+      <button class="btn btn-warning ownDiscussSubmitMessageButton" target='<%= cid%>'>Submit</button>
+    </div>
+  </div>
+</div>
